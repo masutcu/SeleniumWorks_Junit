@@ -48,4 +48,18 @@ public class Twitter {
         } while (counter != 5);
 
     }
+
+    public static String GetId() {
+        int sayac = 0;
+        String sifre = "";
+        String[] karakterler = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"};
+        int maxindex = karakterler.length;
+        while (sayac < 5) {
+            int rastgeleIndeks = (int) (Math.random() * maxindex);
+           // sifre += karakterler.charAt(rastgeleIndeks);
+            sayac++;
+
+        }
+        return "DR." + sifre;
+    }
 }
