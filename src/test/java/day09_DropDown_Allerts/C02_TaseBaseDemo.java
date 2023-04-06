@@ -1,4 +1,4 @@
-package day09;
+package day09_DropDown_Allerts;
 
 import org.junit.Assert;
 import org.junit.Test;
