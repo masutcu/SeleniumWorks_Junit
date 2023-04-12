@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -85,11 +87,23 @@ public abstract class TestBase {
         Select select = new Select(ddm);
         select.selectByValue(secenek);
     }
+
     //Switch to : Sayfalar arası geçiş, index 0 dan başlar,
     // girilen index teki window handle değerini alarak o sayfaya geçiş yapar.
-    public static void switchToWindow(int sayfaIndexi){
-        List<String> windowHandleList= new ArrayList<>(driver.getWindowHandles());
+    public static void switchToWindow(int sayfaIndexi) {
+        List<String> windowHandleList = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(windowHandleList.get(sayfaIndexi));
 
+    }
+
+    //Explicit Wait
+    public static void visibleWait(WebElement element, int sayi) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sayi));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    //Alert Wait
+    public static void alertWait(int sayi){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sayi));
+        wait.until(ExpectedConditions.alertIsPresent());
     }
 }
