@@ -45,6 +45,5 @@ public class C01_ScreenShot extends TestBase {
         String dosyaYolu="TestOutput/screenShot"+tarih+".png";
 
         FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
-
     }
 }
