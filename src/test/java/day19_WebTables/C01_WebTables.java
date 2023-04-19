@@ -1,4 +1,4 @@
-package day19_WebTables_ReadExcel;
+package day19_WebTables;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
