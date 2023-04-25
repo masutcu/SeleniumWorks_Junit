@@ -6,6 +6,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -141,5 +142,60 @@ public abstract class TestBase {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    //bu method ile java script executer ile web element click yapılabilir.
+    public void clickByJavaSc(WebElement webElement){
+        JavascriptExecutor jse=(JavascriptExecutor) driver;//Casting
+        jse.executeScript("arguments[0].click();",webElement);
+
+    }
+    //bu method ile java script executer ile sayfa kaydırma yapılabilir.
+    public void scrollByJavaSc(WebElement webElement){
+        JavascriptExecutor jse=(JavascriptExecutor) driver;//Casting
+        jse.executeScript("arguments[0].scrollIntoView(true);",webElement);
+    }
+    //bu method ile java script kullanarak sayfa nın sonuna gidilebilir
+    public void scrollEndByJc(){
+        JavascriptExecutor js=(JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+    //bu method ile java script kullanarak sayfa nın en üstüne gidilebilir
+    public void scrollTopByJc(){
+        JavascriptExecutor js=(JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+    }
+
+    //Bu method sendKeys() metodunun altarnatifi olup Java Script ile web elemente yazı göndermemizi sağlar
+    public void typeWithJSc (String text,WebElement element) {
+
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('value'),'"+text+"')", element);
+
+    }
+    //Bu method ile attribute değerlerini alabilirim:
+    public void getValueByJS(String id, String attributeName) {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String attribute_Value = js.executeScript("return document.getElementById('" + id + "')." + attributeName).toString();
+        System.out.println("Attribute Value: = " + attribute_Value);
+//        NOT: document.querySelector("p").value;  -> TAG KULLANILABILIR
+//             document.querySelector(".example").value; -> CSS DEGERI KULLANILABILIR
+//             document.querySelector("#example").value; -> CSS DEGERI KULLANILABILIR
+
+    }
+    //Click Method hem javascript hem selenium
+    public void click(WebElement element){
+        try {
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();",element);
+        }
+    }
+    //JS SendKeys
+    public void sendKeysJS(WebElement element,String text){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='"+text+"'",element);
+
     }
 }
