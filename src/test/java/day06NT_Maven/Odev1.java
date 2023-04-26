@@ -1,4 +1,4 @@
-package day06NT;
+package day06NT_Maven;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;

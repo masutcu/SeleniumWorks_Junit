@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -35,23 +38,24 @@ public abstract class TestBase {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         //----------------------------------------------------------------------------------------
-        extentReports = new ExtentReports();
-        String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "TestOutput/reports/extentReport_"+tarih+".html";
-        extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
-        extentReports.attachReporter(extentHtmlReporter);
-        //Raporda gözükmesini istediğimiz bilgiler için
-        extentReports.setSystemInfo("Browser","Chrome");
-        extentReports.setSystemInfo("Tester","MehmetAliSutcu");
-        extentHtmlReporter.config().setDocumentTitle("Extent Report");
-        extentHtmlReporter.config().setReportName("Smoke Test Raporu");
-        extentTest=extentReports.createTest("ExtentTest","Test Raporu");
+     //   extentReports = new ExtentReports();
+     //   String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
+     //   String dosyaYolu = "TestOutput/reports/extentReport_"+tarih+".html";
+     //   extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
+     //   extentReports.attachReporter(extentHtmlReporter);
+     //   //Raporda gözükmesini istediğimiz bilgiler için
+     //   extentReports.setSystemInfo("Browser","Chrome");
+     //   extentReports.setSystemInfo("Tester","MehmetAliSutcu");
+     //   extentHtmlReporter.config().setDocumentTitle("Extent Report");
+     //   extentHtmlReporter.config().setReportName("Smoke Test Raporu");
+     //   extentTest=extentReports.createTest("ExtentTest","Test Raporu");
+        //eğer extend report çalıştırılacaksa tearDown() daki extentReports.flush(); ıda aktif hale getirin
     }
     @After
     public void tearDown() throws Exception {
-        extentReports.flush();
+      //  extentReports.flush();
         bekle(3);
-        //driver.quit();
+        // driver.quit();
     }
     //HARD WAIT METHOD
     public static void bekle(int saniye){
@@ -198,4 +202,5 @@ public abstract class TestBase {
         js.executeScript("arguments[0].value='"+text+"'",element);
 
     }
+
 }

@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
-    <Properties>
-        <Property name="basePath">target/logs</Property>
-    </Properties>
-    <!--    Appenders : where to show the logs. console, file, ... -->
-    <Appenders>
-        <!--        formatting fileName for dynamic name generation-->
-        <RollingFile name="file"
-                     filePattern="${basePath}/TechProEd-%d{HH-mm-ss-SSS}.log">
-            <PatternLayout>
-                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
-            </PatternLayout>
-            <!--            creates new file after the size exeeds-->
-            <SizeBasedTriggeringPolicy size="500" />
-        </RollingFile>
+<Configuration status="INFO">
+    <Appenders><!--Log kayıtlarını Consola yazdırır -->
         <Console name="Console" target="SYSTEM_OUT">
-            <!--    PatternLayout : what format logs will be displayed -->
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
+        <File name="File" fileName="selenium.log" append="true"><!--Logları test çalışırken ekler -->
+            <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss} %c %m%n" />
+        </File>
     </Appenders>
-    <!--    Loggers : logs the information. Logger is used to override Root level
-    additivity="false" avoids duplicated messages that can come from parent levels.
-    This should be used with Logger-->
-    <Loggers>
-        <!--        SPECIAL SETTING FOR tests.log4Jtests FOLDER
-        İstediğim klasördeki ayarları değiştirmek için bu bölüm kullanılır.
-        Level=trace ==> tüm seviyelerdeki logları yazdırır-->
-        <Logger name="day22_Log4J" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="file"/>
-        </Logger>
-        <!--      Root : provides level to ALL classes on the project
-        By default level = error prints errors and fatal
-        level=trace will logs everything-->
+    <Loggers><!--Hangi seviyede loglama yapılacağı belirtilir -->
         <Root level="info">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="file"/>
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
         </Root>
     </Loggers>
 </Configuration>
