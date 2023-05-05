@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class C01 {
     public static void main(String[] args) {
-// https://www.amazon.com/ adresine gidin
+        // https://www.amazon.com/ adresine gidin
         // arama kutusunun, tagName'inin 'input' oldugunu test ediniz
         // arama kutusunun, name attribute'nun degerinin 'field-keywords' oldugunu test edin
         // sayfayi kapatiniz
@@ -22,14 +22,8 @@ public class C01 {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
-
         // https://www.amazon.com/ adresine gidin
         driver.get("https://www.amazon.com/");
-
-
-
-
-
 
         // arama kutusunun, tagName'inin 'input' oldugunu test ediniz
         WebElement aramaKutusu = driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
@@ -44,13 +38,6 @@ public class C01 {
             System.out.println("TagName input degil");
         }
 
-
-
-
-
-
-
-
         // arama kutusunun, name attribute'nun degerinin 'field-keywords' oldugunu test edin
 
         String actuelNameDegeri = aramaKutusu.getAttribute("name");
@@ -64,13 +51,6 @@ public class C01 {
         }else{
             System.out.println("name attributenun degeri field keywords degil");
         }
-
-
-
-
-
-
-
 
         // sayfayi kapatiniz
         driver.close();
